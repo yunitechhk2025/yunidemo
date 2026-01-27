@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI项目解决方案生成器</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🤖 AI项目解决方案生成器</h1>
+      <p class="subtitle">输入您的行业痛点，获取专业的AI解决方案</p>
+    </header>
+
+    <main>
+      <div class="input-section">
+        <textarea 
+          id="painPointInput" 
+          placeholder="例如：我的零售店库存管理很混乱，经常缺货或积压，需要更好的管理系统..."
+          rows="4"
+        ></textarea>
+        <button id="matchBtn" class="primary-btn">生成解决方案</button>
+      </div>
+
+      <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>正在分析您的需求...</p>
+      </div>
+
+      <div id="results" class="results-section"></div>
+    </main>
+
+    <footer>
+      <p>支持香港十大行业：零售、餐饮、物流、房地产、医疗、教育、金融、美容、酒店、制造</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

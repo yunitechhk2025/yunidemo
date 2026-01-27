@@ -1,0 +1,28 @@
+# 排除不需要上传到 Cloud Run 的文件
+node_modules/
+npm-debug.log
+.env
+.env.local
+.git/
+.gitignore
+README.md
+*.md
+.vscode/
+.idea/
+*.log
+.DS_Store
+test-*.js
+test-*.html
+quick-test.js
+logs/
+*.swp
+*.swo
+*~
+
+# 保留必要的文件
+!package.json
+!package-lock.json
+!src/
+!frontend/
+!data/
+!Dockerfile
