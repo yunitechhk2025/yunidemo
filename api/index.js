@@ -4,14 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-// 注意：Vercel 中路径可能需要调整
-let SolutionMatcher;
-try {
-  SolutionMatcher = require('../src/matcher');
-} catch (e) {
-  // 如果路径不对，尝试其他路径
-  SolutionMatcher = require('./src/matcher');
-}
+// Vercel 中路径处理
+const SolutionMatcher = require('../src/matcher');
 
 const app = express();
 const matcher = new SolutionMatcher();
@@ -19,7 +13,7 @@ const matcher = new SolutionMatcher();
 app.use(cors());
 app.use(express.json());
 
-// 静态文件服务（前端）
+// 静态文件服务（前端）- Vercel会自动处理静态文件，这里作为备用
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // API 路由
@@ -88,7 +82,13 @@ app.get('/api/industry/:id/solutions', (req, res) => {
 
 // 处理所有其他路由，返回前端页面
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  // 排除 API 路由
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ success: false, error: 'API endpoint not found' });
+  }
+  // 返回前端页面
+  const indexPath = path.join(__dirname, '../frontend/index.html');
+  res.sendFile(indexPath);
 });
 
 // Vercel 需要导出 app
