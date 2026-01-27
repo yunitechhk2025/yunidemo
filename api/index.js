@@ -13,8 +13,18 @@ const matcher = new SolutionMatcher();
 app.use(cors());
 app.use(express.json());
 
-// 静态文件服务（前端）- Vercel会自动处理静态文件，这里作为备用
-app.use(express.static(path.join(__dirname, '../frontend')));
+// 静态文件服务（前端）
+const frontendPath = path.join(__dirname, '../frontend');
+app.use(express.static(frontendPath));
+
+// 提供静态文件的路由
+app.get('/styles.css', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'styles.css'));
+});
+
+app.get('/app.js', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'app.js'));
+});
 
 // API 路由
 app.get('/api/industries', (req, res) => {
