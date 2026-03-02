@@ -31,7 +31,7 @@ app.get('/api/industries', (req, res) => {
 // 根据痛点匹配解决方案
 app.post('/api/match', async (req, res) => {
   try {
-    const { painPoint } = req.body;
+    const { painPoint, model } = req.body;
     
     if (!painPoint || painPoint.trim().length === 0) {
       return res.status(400).json({
@@ -40,12 +40,13 @@ app.post('/api/match', async (req, res) => {
       });
     }
 
-    const matches = await matcher.matchSolutions(painPoint);
+    const matches = await matcher.matchSolutions(painPoint, model);
     
     res.json({
       success: true,
       data: {
         input: painPoint,
+        model: matcher.gemini.model,
         matchCount: matches.length,
         solutions: matches,
         aiEnabled: matcher.gemini.enabled

@@ -1,4 +1,4 @@
-// 痛点匹配引擎
+// 痛点匹配引擎 - AI 自主生成模式
 const fs = require('fs');
 const path = require('path');
 const GeminiService = require('./gemini-service');
@@ -15,50 +15,36 @@ class SolutionMatcher {
     return JSON.parse(data);
   }
 
-  // 主匹配函数（异步，支持 AI）
-  async matchSolutions(userInput) {
-    // 尝试使用 Gemini AI 分析
-    const aiAnalysis = await this.gemini.analyzeAndMapIndustry(
-      userInput, 
-      this.getAllIndustries()
-    );
+  // 主匹配函数 - AI 自主生成模式
+  async matchSolutions(userInput, model = null) {
+    // 如果指定了模型，切换到该模型
+    if (model) {
+      this.gemini.setModel(model);
+    }
+    
+    // 尝试使用 AI 自主生成完整解决方案
+    console.log(`🤖 使用 AI 自主生成模式 (模型: ${this.gemini.model})...`);
+    
+    const aiResult = await this.gemini.generateFullSolution(userInput);
 
-    if (aiAnalysis && aiAnalysis.industry_id) {
-      console.log(`🎯 AI 映射到行业: ${aiAnalysis.industry_id} (置信度: ${aiAnalysis.confidence})`);
+    if (aiResult && aiResult.solution) {
+      console.log(`✅ AI 生成方案成功: ${aiResult.solution.name}`);
       
-      // 根据 AI 分析结果获取对应行业的解决方案
-      const industry = this.solutions.industries.find(
-        ind => ind.id === aiAnalysis.industry_id
-      );
-
-      if (industry && industry.solutions.length > 0) {
-        const matches = [];
-        
-        for (const solution of industry.solutions) {
-          // 生成个性化建议
-          const customRecommendation = await this.gemini.generateCustomRecommendation(
-            userInput, 
-            solution
-          );
-
-          matches.push({
-            score: aiAnalysis.confidence * 100,
-            industry: industry.name,
-            solution: solution,
-            aiAnalysis: {
-              reasoning: aiAnalysis.reasoning,
-              confidence: aiAnalysis.confidence,
-              customRecommendation: customRecommendation
-            }
-          });
+      return [{
+        score: 95,
+        industry: aiResult.industry,
+        solution: aiResult.solution,
+        aiAnalysis: {
+          reasoning: aiResult.reasoning,
+          confidence: 0.95,
+          customRecommendation: aiResult.reasoning,
+          generatedByAI: true
         }
-
-        return matches;
-      }
+      }];
     }
 
-    // 如果 AI 不可用或失败，使用传统关键词匹配
-    console.log('📝 使用关键词匹配模式');
+    // 如果 AI 生成失败，使用传统关键词匹配作为备用
+    console.log('📝 AI 生成失败，使用关键词匹配模式');
     return this.keywordMatch(userInput);
   }
 
@@ -133,7 +119,7 @@ class SolutionMatcher {
     return score;
   }
 
-  // 获取所有行业列表
+  // 获取所有行业列表（用于前端显示）
   getAllIndustries() {
     return this.solutions.industries.map(industry => ({
       id: industry.id,
@@ -142,7 +128,7 @@ class SolutionMatcher {
     }));
   }
 
-  // 根据行业ID获取解决方案
+  // 根据行业ID获取解决方案（备用）
   getSolutionsByIndustry(industryId) {
     const industry = this.solutions.industries.find(ind => ind.id === industryId);
     return industry ? industry.solutions : [];

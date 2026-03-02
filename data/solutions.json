@@ -3,95 +3,35 @@
     {
       "id": "retail",
       "name": "零售业",
-      "keywords": ["库存", "销售", "客户管理", "收银", "进销存", "会员"],
+      "keywords": ["库存", "销售", "收银", "会员", "门店", "inventory", "retail", "sales"],
       "solutions": [
         {
           "id": "retail-001",
-          "name": "智能零售管理系统",
-          "painPoint": "库存管理混乱，销售数据分析困难，会员管理效率低",
-          "description": "基于AI的智能零售管理系统，包含智能库存预测、销售数据分析、会员画像分析",
-          "features": [
-            "AI库存预测和自动补货提醒",
-            "销售数据可视化分析",
-            "会员消费行为分析",
-            "多门店数据同步",
-            "移动端管理"
-          ],
+          "name": "轻量级零售管理系统",
+          "painPoint": "库存管理混乱，销售数据难追踪",
+          "description": "适合中小零售商的轻量管理系统，包含库存管理、销售统计、会员管理等核心功能，由一名全栈工程师开发，预算可控。",
+          "features": ["库存管理与预警", "销售数据统计", "会员积分系统"],
           "development": {
-            "price": 180000,
+            "price": 80000,
             "currency": "HKD",
-            "duration": "3-4个月",
-            "techStack": ["React", "Node.js", "PostgreSQL", "Python (芋泥大模型折扣服务)", "微信小程序"],
+            "duration": "1-2个月",
+            "techStack": ["Vue.js", "Node.js", "MySQL"],
             "resources": [
-              {
-                "type": "算力服务",
-                "name": "阿里云香港节点",
-                "specs": "4核8G服务器",
-                "link": "/platform/services/aliyun-hk"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "销售预测模型API",
-                "link": "/platform/services/ai-forecast"
-              },
-              {
-                "type": "支付接口",
-                "name": "支付宝/微信支付",
-                "link": "/platform/services/payment"
-              }
+              {"type": "算力服务", "name": "阿里云轻量服务器", "specs": "2核4G", "link": "/platform/services/cloud"},
+              {"type": "芋泥大模型折扣服务", "name": "智能推荐API", "link": "/platform/services/ai"}
             ],
             "humanResources": [
-              {
-                "role": "全栈工程师",
-                "count": 2,
-                "duration": "4个月",
-                "link": "/platform/talents/fullstack"
-              },
-              {
-                "role": "AI算法工程师",
-                "count": 1,
-                "duration": "2个月",
-                "link": "/platform/talents/ai-engineer"
-              },
-              {
-                "role": "UI/UX设计师",
-                "count": 1,
-                "duration": "1个月",
-                "link": "/platform/talents/designer"
-              }
+              {"role": "全栈工程师", "count": 1, "duration": "2个月", "link": "/platform/talents/fullstack"}
             ]
           },
           "maintenance": {
-            "monthlyPrice": 8000,
+            "monthlyPrice": 4500,
             "currency": "HKD",
             "resources": [
-              {
-                "type": "算力服务器",
-                "name": "阿里云ECS",
-                "monthlyCost": 3000,
-                "link": "/platform/services/aliyun-hk"
-              },
-              {
-                "type": "数据库",
-                "name": "PostgreSQL RDS",
-                "monthlyCost": 2000,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "CDN加速",
-                "monthlyCost": 800,
-                "link": "/platform/services/cdn"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 2000,
-                "link": "/platform/services/ai-forecast"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 2200,
-                "link": "/platform/services/support"
-              }
+              {"type": "算力服务器", "name": "云服务器", "monthlyCost": 800, "link": "/platform/services/cloud"},
+              {"type": "数据库", "name": "MySQL", "monthlyCost": 500, "link": "/platform/services/database"},
+              {"type": "芋泥大模型折扣服务费用", "monthlyCost": 1000, "link": "/platform/services/ai"},
+              {"type": "技术支持", "monthlyCost": 700, "link": "/platform/services/support"}
             ]
           }
         }
@@ -100,382 +40,72 @@
     {
       "id": "restaurant",
       "name": "餐饮业",
-      "keywords": ["点餐", "外卖", "预订", "排队", "菜单", "厨房管理"],
+      "keywords": ["餐厅", "外卖", "预订", "排队", "菜单", "点餐", "restaurant", "food", "order"],
       "solutions": [
         {
           "id": "restaurant-001",
-          "name": "智能餐饮管理系统",
-          "painPoint": "点餐效率低，外卖订单管理混乱，食材浪费严重",
-          "description": "AI驱动的餐饮全流程管理系统，包含智能点餐、外卖整合、食材管理",
-          "features": [
-            "扫码点餐系统",
-            "AI菜品推荐",
-            "外卖平台订单整合",
-            "智能食材采购建议",
-            "厨房显示系统(KDS)",
-            "营业数据分析"
-          ],
+          "name": "智能餐饮管理小程序",
+          "painPoint": "排队管理混乱，点餐效率低",
+          "description": "微信小程序形态的餐饮管理系统，支持扫码点餐、排队叫号、外卖接单，一人开发，快速上线。",
+          "features": ["扫码点餐", "排队叫号", "外卖管理"],
           "development": {
-            "price": 150000,
+            "price": 70000,
             "currency": "HKD",
-            "duration": "2-3个月",
-            "techStack": ["Vue.js", "Node.js", "MongoDB", "微信小程序", "芋泥大模型折扣服务推荐引擎"],
+            "duration": "1-2个月",
+            "techStack": ["微信小程序", "Node.js", "MongoDB"],
             "resources": [
-              {
-                "type": "算力服务",
-                "name": "腾讯云香港节点",
-                "specs": "4核8G服务器",
-                "link": "/platform/services/tencent-hk"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "智能推荐系统",
-                "link": "/platform/services/ai-recommend"
-              },
-              {
-                "type": "外卖接口",
-                "name": "Deliveroo/FoodPanda API",
-                "link": "/platform/services/delivery"
-              }
+              {"type": "算力服务", "name": "腾讯云轻量服务器", "specs": "2核4G", "link": "/platform/services/cloud"},
+              {"type": "芋泥大模型折扣服务", "name": "智能推荐API", "link": "/platform/services/ai"}
             ],
             "humanResources": [
-              {
-                "role": "全栈工程师",
-                "count": 2,
-                "duration": "3个月",
-                "link": "/platform/talents/fullstack"
-              },
-              {
-                "role": "小程序开发工程师",
-                "count": 1,
-                "duration": "2个月",
-                "link": "/platform/talents/miniapp"
-              }
+              {"role": "全栈工程师", "count": 1, "duration": "2个月", "link": "/platform/talents/fullstack"}
             ]
           },
           "maintenance": {
-            "monthlyPrice": 6500,
+            "monthlyPrice": 4500,
             "currency": "HKD",
             "resources": [
-              {
-                "type": "算力服务器",
-                "monthlyCost": 2500,
-                "link": "/platform/services/tencent-hk"
-              },
-              {
-                "type": "数据库",
-                "monthlyCost": 1500,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "外卖API费用",
-                "monthlyCost": 1000,
-                "link": "/platform/services/delivery"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 1500,
-                "link": "/platform/services/ai-recommend"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 1500,
-                "link": "/platform/services/support"
-              }
+              {"type": "算力服务器", "name": "云服务器", "monthlyCost": 600, "link": "/platform/services/cloud"},
+              {"type": "数据库", "name": "MongoDB", "monthlyCost": 400, "link": "/platform/services/database"},
+              {"type": "芋泥大模型折扣服务费用", "monthlyCost": 800, "link": "/platform/services/ai"},
+              {"type": "技术支持", "monthlyCost": 700, "link": "/platform/services/support"}
             ]
           }
         }
       ]
     },
     {
-      "id": "logistics",
-      "name": "物流运输业",
-      "keywords": ["配送", "路线", "追踪", "仓储", "运输", "货物"],
+      "id": "service",
+      "name": "服务业",
+      "keywords": ["预约", "客户", "服务", "appointment", "booking", "service", "salon", "美容", "美发"],
       "solutions": [
         {
-          "id": "logistics-001",
-          "name": "智能物流调度系统",
-          "painPoint": "配送路线不优化，货物追踪困难，调度效率低",
-          "description": "AI智能路线规划和实时追踪系统，提升配送效率30%",
-          "features": [
-            "AI路线优化算法",
-            "实时GPS追踪",
-            "电子签收",
-            "智能调度分配",
-            "客户通知系统",
-            "数据分析报表"
-          ],
+          "id": "service-001",
+          "name": "预约管理系统",
+          "painPoint": "预约混乱，客户管理困难",
+          "description": "适合美容美发、医疗诊所等服务行业的预约管理系统，支持在线预约、客户档案、服务记录。",
+          "features": ["在线预约", "客户档案", "服务记录"],
           "development": {
-            "price": 220000,
+            "price": 65000,
             "currency": "HKD",
-            "duration": "4-5个月",
-            "techStack": ["React Native", "Node.js", "PostgreSQL", "Python (路线优化)", "地图API"],
+            "duration": "1-2个月",
+            "techStack": ["React", "Node.js", "PostgreSQL"],
             "resources": [
-              {
-                "type": "算力服务",
-                "name": "AWS香港节点",
-                "specs": "8核16G服务器",
-                "link": "/platform/services/aws-hk"
-              },
-              {
-                "type": "地图服务",
-                "name": "Google Maps API",
-                "link": "/platform/services/maps"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "路线优化引擎",
-                "link": "/platform/services/ai-routing"
-              }
+              {"type": "算力服务", "name": "阿里云ECS", "specs": "2核4G", "link": "/platform/services/cloud"},
+              {"type": "芋泥大模型折扣服务", "name": "智能客服API", "link": "/platform/services/ai"}
             ],
             "humanResources": [
-              {
-                "role": "后端工程师",
-                "count": 2,
-                "duration": "5个月",
-                "link": "/platform/talents/backend"
-              },
-              {
-                "role": "移动端工程师",
-                "count": 1,
-                "duration": "4个月",
-                "link": "/platform/talents/mobile"
-              },
-              {
-                "role": "算法工程师",
-                "count": 1,
-                "duration": "3个月",
-                "link": "/platform/talents/algorithm"
-              }
+              {"role": "全栈工程师", "count": 1, "duration": "1.5个月", "link": "/platform/talents/fullstack"}
             ]
           },
           "maintenance": {
-            "monthlyPrice": 12000,
+            "monthlyPrice": 4500,
             "currency": "HKD",
             "resources": [
-              {
-                "type": "算力服务器",
-                "monthlyCost": 5000,
-                "link": "/platform/services/aws-hk"
-              },
-              {
-                "type": "数据库",
-                "monthlyCost": 3000,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "地图API费用",
-                "monthlyCost": 2000,
-                "link": "/platform/services/maps"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 2500,
-                "link": "/platform/services/ai-routing"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 2000,
-                "link": "/platform/services/support"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "realestate",
-      "name": "房地产中介",
-      "keywords": ["房源", "客户", "带看", "成交", "楼盘", "租赁"],
-      "solutions": [
-        {
-          "id": "realestate-001",
-          "name": "AI房产中介管理系统",
-          "painPoint": "房源管理混乱，客户匹配效率低，带看记录难追踪",
-          "description": "智能房源匹配和客户管理系统，AI自动匹配客户需求",
-          "features": [
-            "AI房源推荐引擎",
-            "客户需求智能匹配",
-            "VR看房集成",
-            "带看行程管理",
-            "合同电子化",
-            "佣金自动计算"
-          ],
-          "development": {
-            "price": 200000,
-            "currency": "HKD",
-            "duration": "3-4个月",
-            "techStack": ["React", "Node.js", "MySQL", "Python (推荐算法)", "微信集成"],
-            "resources": [
-              {
-                "type": "算力服务",
-                "name": "阿里云香港节点",
-                "specs": "4核8G服务器",
-                "link": "/platform/services/aliyun-hk"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "智能匹配引擎",
-                "link": "/platform/services/ai-matching"
-              },
-              {
-                "type": "存储服务",
-                "name": "OSS对象存储(图片/视频)",
-                "link": "/platform/services/storage"
-              }
-            ],
-            "humanResources": [
-              {
-                "role": "全栈工程师",
-                "count": 2,
-                "duration": "4个月",
-                "link": "/platform/talents/fullstack"
-              },
-              {
-                "role": "AI工程师",
-                "count": 1,
-                "duration": "2个月",
-                "link": "/platform/talents/ai-engineer"
-              },
-              {
-                "role": "产品经理",
-                "count": 1,
-                "duration": "4个月",
-                "link": "/platform/talents/pm"
-              }
-            ]
-          },
-          "maintenance": {
-            "monthlyPrice": 9000,
-            "currency": "HKD",
-            "resources": [
-              {
-                "type": "算力服务器",
-                "monthlyCost": 3500,
-                "link": "/platform/services/aliyun-hk"
-              },
-              {
-                "type": "数据库",
-                "monthlyCost": 2500,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "存储费用",
-                "monthlyCost": 1500,
-                "link": "/platform/services/storage"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 1800,
-                "link": "/platform/services/ai-matching"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 1500,
-                "link": "/platform/services/support"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "healthcare",
-      "name": "医疗诊所",
-      "keywords": ["预约", "病历", "排队", "药品", "诊断", "患者"],
-      "solutions": [
-        {
-          "id": "healthcare-001",
-          "name": "智能诊所管理系统",
-          "painPoint": "预约混乱，病历管理困难，排队时间长",
-          "description": "数字化诊所管理系统，包含在线预约、电子病历、智能分诊",
-          "features": [
-            "在线预约挂号",
-            "电子病历系统",
-            "AI辅助分诊",
-            "药品库存管理",
-            "患者提醒通知",
-            "数据统计分析"
-          ],
-          "development": {
-            "price": 280000,
-            "currency": "HKD",
-            "duration": "5-6个月",
-            "techStack": ["Vue.js", "Java Spring", "MySQL", "微信小程序", "数据加密"],
-            "resources": [
-              {
-                "type": "算力服务",
-                "name": "腾讯云香港节点(医疗级)",
-                "specs": "8核16G服务器",
-                "link": "/platform/services/tencent-medical"
-              },
-              {
-                "type": "数据安全",
-                "name": "SSL证书+数据加密",
-                "link": "/platform/services/security"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "智能分诊系统",
-                "link": "/platform/services/ai-triage"
-              }
-            ],
-            "humanResources": [
-              {
-                "role": "后端工程师",
-                "count": 2,
-                "duration": "6个月",
-                "link": "/platform/talents/backend"
-              },
-              {
-                "role": "前端工程师",
-                "count": 1,
-                "duration": "5个月",
-                "link": "/platform/talents/frontend"
-              },
-              {
-                "role": "安全工程师",
-                "count": 1,
-                "duration": "3个月",
-                "link": "/platform/talents/security"
-              },
-              {
-                "role": "医疗行业顾问",
-                "count": 1,
-                "duration": "2个月",
-                "link": "/platform/talents/consultant"
-              }
-            ]
-          },
-          "maintenance": {
-            "monthlyPrice": 15000,
-            "currency": "HKD",
-            "resources": [
-              {
-                "type": "算力服务器(医疗级)",
-                "monthlyCost": 6000,
-                "link": "/platform/services/tencent-medical"
-              },
-              {
-                "type": "数据库",
-                "monthlyCost": 4000,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "安全服务",
-                "monthlyCost": 2500,
-                "link": "/platform/services/security"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 2000,
-                "link": "/platform/services/ai-triage"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 2500,
-                "link": "/platform/services/support"
-              }
+              {"type": "算力服务器", "name": "云服务器", "monthlyCost": 600, "link": "/platform/services/cloud"},
+              {"type": "数据库", "name": "PostgreSQL", "monthlyCost": 400, "link": "/platform/services/database"},
+              {"type": "芋泥大模型折扣服务费用", "monthlyCost": 800, "link": "/platform/services/ai"},
+              {"type": "技术支持", "monthlyCost": 700, "link": "/platform/services/support"}
             ]
           }
         }
@@ -484,526 +114,109 @@
     {
       "id": "education",
       "name": "教育培训",
-      "keywords": ["课程", "学员", "排课", "考试", "在线教学", "作业"],
+      "keywords": ["课程", "学员", "培训", "教学", "education", "training", "course", "student"],
       "solutions": [
         {
           "id": "education-001",
-          "name": "在线教育管理平台",
-          "painPoint": "排课复杂，学员管理困难，线上线下难以整合",
-          "description": "OMO教育管理系统，支持在线直播、录播、作业批改",
-          "features": [
-            "智能排课系统",
-            "在线直播教学",
-            "AI作业批改",
-            "学员学习轨迹分析",
-            "家长端APP",
-            "考勤打卡系统"
-          ],
+          "name": "在线课程平台",
+          "painPoint": "课程管理困难，学员追踪不便",
+          "description": "轻量级在线教育平台，支持课程发布、学员管理、学习进度追踪，适合小型培训机构。",
+          "features": ["课程管理", "学员管理", "学习进度追踪"],
           "development": {
-            "price": 240000,
+            "price": 85000,
             "currency": "HKD",
-            "duration": "4-5个月",
-            "techStack": ["React", "Node.js", "PostgreSQL", "WebRTC", "芋泥大模型折扣服务批改引擎"],
+            "duration": "2个月",
+            "techStack": ["Vue.js", "Node.js", "MySQL"],
             "resources": [
-              {
-                "type": "算力服务",
-                "name": "阿里云香港节点",
-                "specs": "8核16G服务器",
-                "link": "/platform/services/aliyun-hk"
-              },
-              {
-                "type": "直播服务",
-                "name": "声网Agora直播SDK",
-                "link": "/platform/services/live-streaming"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "作业批改芋泥大模型折扣服务",
-                "link": "/platform/services/ai-grading"
-              },
-              {
-                "type": "存储服务",
-                "name": "视频存储CDN",
-                "link": "/platform/services/video-storage"
-              }
+              {"type": "算力服务", "name": "阿里云ECS", "specs": "2核4G", "link": "/platform/services/cloud"},
+              {"type": "芋泥大模型折扣服务", "name": "智能助教API", "link": "/platform/services/ai"}
             ],
             "humanResources": [
-              {
-                "role": "全栈工程师",
-                "count": 2,
-                "duration": "5个月",
-                "link": "/platform/talents/fullstack"
-              },
-              {
-                "role": "移动端工程师",
-                "count": 1,
-                "duration": "4个月",
-                "link": "/platform/talents/mobile"
-              },
-              {
-                "role": "音视频工程师",
-                "count": 1,
-                "duration": "3个月",
-                "link": "/platform/talents/av-engineer"
-              }
+              {"role": "全栈工程师", "count": 1, "duration": "2个月", "link": "/platform/talents/fullstack"}
             ]
           },
           "maintenance": {
-            "monthlyPrice": 18000,
+            "monthlyPrice": 4500,
             "currency": "HKD",
             "resources": [
-              {
-                "type": "算力服务器",
-                "monthlyCost": 5000,
-                "link": "/platform/services/aliyun-hk"
-              },
-              {
-                "type": "直播服务费",
-                "monthlyCost": 6000,
-                "link": "/platform/services/live-streaming"
-              },
-              {
-                "type": "视频存储CDN",
-                "monthlyCost": 4000,
-                "link": "/platform/services/video-storage"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 2500,
-                "link": "/platform/services/ai-grading"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 3000,
-                "link": "/platform/services/support"
-              }
+              {"type": "算力服务器", "name": "云服务器", "monthlyCost": 1000, "link": "/platform/services/cloud"},
+              {"type": "数据库", "name": "MySQL", "monthlyCost": 600, "link": "/platform/services/database"},
+              {"type": "芋泥大模型折扣服务费用", "monthlyCost": 1200, "link": "/platform/services/ai"},
+              {"type": "技术支持", "monthlyCost": 700, "link": "/platform/services/support"}
             ]
           }
         }
       ]
     },
     {
-      "id": "finance",
-      "name": "金融服务",
-      "keywords": ["贷款", "风控", "客户", "审批", "合规", "理财"],
+      "id": "logistics",
+      "name": "物流仓储",
+      "keywords": ["物流", "仓库", "配送", "库存", "logistics", "warehouse", "delivery", "shipping"],
       "solutions": [
         {
-          "id": "finance-001",
-          "name": "智能风控审批系统",
-          "painPoint": "贷款审批慢，风险评估不准确，合规成本高",
-          "description": "AI驱动的智能风控系统，自动化审批流程",
-          "features": [
-            "AI信用评分模型",
-            "自动化审批流程",
-            "反欺诈检测",
-            "合规报告生成",
-            "客户画像分析",
-            "风险预警系统"
-          ],
+          "id": "logistics-001",
+          "name": "仓储管理系统",
+          "painPoint": "库存混乱，出入库效率低",
+          "description": "轻量级仓储管理系统，支持入库出库、库存盘点、配送追踪，适合中小物流企业。",
+          "features": ["出入库管理", "库存盘点", "配送追踪"],
           "development": {
-            "price": 350000,
+            "price": 90000,
             "currency": "HKD",
-            "duration": "6-8个月",
-            "techStack": ["Java Spring", "Python (ML)", "Oracle", "区块链", "加密技术"],
+            "duration": "2个月",
+            "techStack": ["React", "Node.js", "PostgreSQL"],
             "resources": [
-              {
-                "type": "算力服务",
-                "name": "AWS香港节点(金融级)",
-                "specs": "16核32G服务器",
-                "link": "/platform/services/aws-financial"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "风控模型训练平台",
-                "link": "/platform/services/ai-risk"
-              },
-              {
-                "type": "数据安全",
-                "name": "金融级加密+审计",
-                "link": "/platform/services/financial-security"
-              },
-              {
-                "type": "第三方数据",
-                "name": "征信数据接口",
-                "link": "/platform/services/credit-data"
-              }
+              {"type": "算力服务", "name": "阿里云ECS", "specs": "2核4G", "link": "/platform/services/cloud"},
+              {"type": "芋泥大模型折扣服务", "name": "智能调度API", "link": "/platform/services/ai"}
             ],
             "humanResources": [
-              {
-                "role": "后端架构师",
-                "count": 1,
-                "duration": "8个月",
-                "link": "/platform/talents/architect"
-              },
-              {
-                "role": "后端工程师",
-                "count": 2,
-                "duration": "8个月",
-                "link": "/platform/talents/backend"
-              },
-              {
-                "role": "数据科学家",
-                "count": 1,
-                "duration": "6个月",
-                "link": "/platform/talents/data-scientist"
-              },
-              {
-                "role": "安全工程师",
-                "count": 1,
-                "duration": "6个月",
-                "link": "/platform/talents/security"
-              },
-              {
-                "role": "金融合规顾问",
-                "count": 1,
-                "duration": "4个月",
-                "link": "/platform/talents/compliance"
-              }
+              {"role": "全栈工程师", "count": 1, "duration": "2个月", "link": "/platform/talents/fullstack"}
             ]
           },
           "maintenance": {
-            "monthlyPrice": 25000,
+            "monthlyPrice": 4500,
             "currency": "HKD",
             "resources": [
-              {
-                "type": "算力服务器(金融级)",
-                "monthlyCost": 10000,
-                "link": "/platform/services/aws-financial"
-              },
-              {
-                "type": "数据库集群",
-                "monthlyCost": 6000,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "安全审计服务",
-                "monthlyCost": 4000,
-                "link": "/platform/services/financial-security"
-              },
-              {
-                "type": "征信数据费用",
-                "monthlyCost": 3000,
-                "link": "/platform/services/credit-data"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 4000,
-                "link": "/platform/services/ai-risk"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 2000,
-                "link": "/platform/services/support"
-              }
+              {"type": "算力服务器", "name": "云服务器", "monthlyCost": 1000, "link": "/platform/services/cloud"},
+              {"type": "数据库", "name": "PostgreSQL", "monthlyCost": 600, "link": "/platform/services/database"},
+              {"type": "芋泥大模型折扣服务费用", "monthlyCost": 1200, "link": "/platform/services/ai"},
+              {"type": "技术支持", "monthlyCost": 700, "link": "/platform/services/support"}
             ]
           }
         }
       ]
     },
     {
-      "id": "beauty",
-      "name": "美容美发",
-      "keywords": ["预约", "会员", "美容师", "排班", "产品销售", "客户管理"],
+      "id": "general",
+      "name": "通用方案",
+      "keywords": ["管理", "系统", "平台", "工具", "management", "system", "platform", "tool"],
       "solutions": [
         {
-          "id": "beauty-001",
-          "name": "智能美业管理系统",
-          "painPoint": "预约冲突频繁，会员管理混乱，美容师排班困难",
-          "description": "一体化美业管理系统，包含预约、会员、库存、营销",
-          "features": [
-            "在线预约系统",
-            "智能排班算法",
-            "会员积分管理",
-            "产品库存管理",
-            "营销活动推送",
-            "业绩统计分析"
-          ],
+          "id": "general-001",
+          "name": "定制化管理系统",
+          "painPoint": "业务管理效率低，数据分散",
+          "description": "根据您的具体需求定制的管理系统，包含核心业务流程管理、数据统计分析等功能。",
+          "features": ["业务流程管理", "数据统计分析", "用户权限管理"],
           "development": {
-            "price": 120000,
+            "price": 80000,
             "currency": "HKD",
-            "duration": "2-3个月",
-            "techStack": ["Vue.js", "Node.js", "MySQL", "微信小程序", "支付接口"],
+            "duration": "1-2个月",
+            "techStack": ["Vue.js", "Node.js", "MySQL"],
             "resources": [
-              {
-                "type": "算力服务",
-                "name": "腾讯云香港节点",
-                "specs": "2核4G服务器",
-                "link": "/platform/services/tencent-hk"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "智能排班推荐系统",
-                "link": "/platform/services/ai-scheduling"
-              },
-              {
-                "type": "支付接口",
-                "name": "微信/支付宝支付",
-                "link": "/platform/services/payment"
-              },
-              {
-                "type": "短信服务",
-                "name": "预约提醒短信",
-                "link": "/platform/services/sms"
-              }
+              {"type": "算力服务", "name": "云服务器", "specs": "2核4G", "link": "/platform/services/cloud"},
+              {"type": "芋泥大模型折扣服务", "name": "智能分析API", "link": "/platform/services/ai"}
             ],
             "humanResources": [
-              {
-                "role": "全栈工程师",
-                "count": 2,
-                "duration": "3个月",
-                "link": "/platform/talents/fullstack"
-              },
-              {
-                "role": "UI设计师",
-                "count": 1,
-                "duration": "1个月",
-                "link": "/platform/talents/designer"
-              }
+              {"role": "全栈工程师", "count": 1, "duration": "2个月", "link": "/platform/talents/fullstack"}
             ]
           },
           "maintenance": {
-            "monthlyPrice": 5000,
+            "monthlyPrice": 4500,
             "currency": "HKD",
             "resources": [
-              {
-                "type": "算力服务器",
-                "monthlyCost": 2000,
-                "link": "/platform/services/tencent-hk"
-              },
-              {
-                "type": "数据库",
-                "monthlyCost": 1200,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "短信费用",
-                "monthlyCost": 800,
-                "link": "/platform/services/sms"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 1000,
-                "link": "/platform/services/ai-scheduling"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 1000,
-                "link": "/platform/services/support"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "hotel",
-      "name": "酒店民宿",
-      "keywords": ["预订", "入住", "房态", "客房管理", "OTA", "清洁"],
-      "solutions": [
-        {
-          "id": "hotel-001",
-          "name": "智能酒店管理系统",
-          "painPoint": "多平台订单管理混乱，房态更新不及时，客户体验差",
-          "description": "PMS酒店管理系统，整合OTA平台，智能房态管理",
-          "features": [
-            "多OTA平台订单整合",
-            "实时房态管理",
-            "自助入住退房",
-            "智能门锁集成",
-            "清洁任务管理",
-            "收益管理分析"
-          ],
-          "development": {
-            "price": 190000,
-            "currency": "HKD",
-            "duration": "3-4个月",
-            "techStack": ["React", "Java Spring", "MySQL", "IoT集成", "OTA API"],
-            "resources": [
-              {
-                "type": "算力服务",
-                "name": "阿里云香港节点",
-                "specs": "4核8G服务器",
-                "link": "/platform/services/aliyun-hk"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "智能收益管理分析系统",
-                "link": "/platform/services/ai-revenue"
-              },
-              {
-                "type": "OTA接口",
-                "name": "Booking/Agoda/Airbnb API",
-                "link": "/platform/services/ota"
-              },
-              {
-                "type": "IoT平台",
-                "name": "智能门锁接口",
-                "link": "/platform/services/iot"
-              }
-            ],
-            "humanResources": [
-              {
-                "role": "后端工程师",
-                "count": 2,
-                "duration": "4个月",
-                "link": "/platform/talents/backend"
-              },
-              {
-                "role": "前端工程师",
-                "count": 1,
-                "duration": "3个月",
-                "link": "/platform/talents/frontend"
-              },
-              {
-                "role": "IoT工程师",
-                "count": 1,
-                "duration": "2个月",
-                "link": "/platform/talents/iot-engineer"
-              }
-            ]
-          },
-          "maintenance": {
-            "monthlyPrice": 10000,
-            "currency": "HKD",
-            "resources": [
-              {
-                "type": "算力服务器",
-                "monthlyCost": 3500,
-                "link": "/platform/services/aliyun-hk"
-              },
-              {
-                "type": "数据库",
-                "monthlyCost": 2500,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "OTA接口费用",
-                "monthlyCost": 2500,
-                "link": "/platform/services/ota"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 2000,
-                "link": "/platform/services/ai-revenue"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 1500,
-                "link": "/platform/services/support"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "manufacturing",
-      "name": "制造业",
-      "keywords": ["生产", "库存", "质检", "设备", "订单", "供应链"],
-      "solutions": [
-        {
-          "id": "manufacturing-001",
-          "name": "智能制造管理系统(MES)",
-          "painPoint": "生产进度难追踪，质检效率低，设备维护不及时",
-          "description": "MES制造执行系统，实时监控生产，AI质检辅助",
-          "features": [
-            "生产计划排程",
-            "实时生产监控",
-            "AI视觉质检",
-            "设备预测性维护",
-            "物料追溯系统",
-            "生产数据分析"
-          ],
-          "development": {
-            "price": 380000,
-            "currency": "HKD",
-            "duration": "6-8个月",
-            "techStack": ["Vue.js", "Java Spring", "PostgreSQL", "Python (芋泥大模型折扣服务视觉)", "IoT平台"],
-            "resources": [
-              {
-                "type": "算力服务",
-                "name": "AWS香港节点",
-                "specs": "16核32G服务器",
-                "link": "/platform/services/aws-hk"
-              },
-              {
-                "type": "芋泥大模型折扣服务",
-                "name": "视觉质检芋泥大模型折扣服务",
-                "link": "/platform/services/ai-vision"
-              },
-              {
-                "type": "IoT平台",
-                "name": "设备数据采集平台",
-                "link": "/platform/services/iot-platform"
-              },
-              {
-                "type": "边缘计算",
-                "name": "工厂边缘网关",
-                "link": "/platform/services/edge-computing"
-              }
-            ],
-            "humanResources": [
-              {
-                "role": "系统架构师",
-                "count": 1,
-                "duration": "8个月",
-                "link": "/platform/talents/architect"
-              },
-              {
-                "role": "后端工程师",
-                "count": 3,
-                "duration": "8个月",
-                "link": "/platform/talents/backend"
-              },
-              {
-                "role": "前端工程师",
-                "count": 1,
-                "duration": "6个月",
-                "link": "/platform/talents/frontend"
-              },
-              {
-                "role": "AI视觉工程师",
-                "count": 1,
-                "duration": "5个月",
-                "link": "/platform/talents/ai-vision"
-              },
-              {
-                "role": "IoT工程师",
-                "count": 1,
-                "duration": "6个月",
-                "link": "/platform/talents/iot-engineer"
-              }
-            ]
-          },
-          "maintenance": {
-            "monthlyPrice": 28000,
-            "currency": "HKD",
-            "resources": [
-              {
-                "type": "算力服务器",
-                "monthlyCost": 10000,
-                "link": "/platform/services/aws-hk"
-              },
-              {
-                "type": "数据库集群",
-                "monthlyCost": 6000,
-                "link": "/platform/services/database"
-              },
-              {
-                "type": "IoT平台费用",
-                "monthlyCost": 5000,
-                "link": "/platform/services/iot-platform"
-              },
-              {
-                "type": "芋泥大模型折扣服务费用",
-                "monthlyCost": 4000,
-                "link": "/platform/services/ai-vision"
-              },
-              {
-                "type": "技术支持",
-                "monthlyCost": 3000,
-                "link": "/platform/services/support"
-              }
+              {"type": "算力服务器", "name": "云服务器", "monthlyCost": 800, "link": "/platform/services/cloud"},
+              {"type": "数据库", "name": "MySQL", "monthlyCost": 500, "link": "/platform/services/database"},
+              {"type": "芋泥大模型折扣服务费用", "monthlyCost": 1000, "link": "/platform/services/ai"},
+              {"type": "技术支持", "monthlyCost": 700, "link": "/platform/services/support"}
             ]
           }
         }
