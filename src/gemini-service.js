@@ -193,12 +193,24 @@ ${industryList}
   }
 
   // AI 自主生成完整解决方案
-  async generateFullSolution(userInput) {
+  async generateFullSolution(userInput, lang = 'zh-CN') {
     if (!this.enabled) {
       return null;
     }
 
-    const prompt = `You are a professional IT solution architect. Analyze the user's business pain point (which may be in any language) and generate a software solution.
+    // 语言映射
+    const langMap = {
+      'zh-CN': 'Simplified Chinese (简体中文)',
+      'zh-TW': 'Traditional Chinese (繁體中文)',
+      'en': 'English'
+    };
+    const targetLang = langMap[lang] || 'Simplified Chinese (简体中文)';
+
+    const prompt = `You are a professional IT solution architect. Analyze the user's business pain point and generate a software solution.
+
+IMPORTANT - OUTPUT LANGUAGE:
+- You MUST reply ALL text fields in ${targetLang}
+- This is mandatory regardless of what language the user writes in
 
 IMPORTANT CONSTRAINTS:
 - Maximum budget: 100,000 HKD (≈12,800 USD)
@@ -210,57 +222,55 @@ User's pain point:
 
 Generate a JSON response following this structure (DO NOT copy example values, calculate based on complexity):
 {
-  "industry": "行业名称",
+  "industry": "[Industry name in user's language]",
   "isSimplified": false,
   "simplificationNote": "",
   "solution": {
     "id": "solution-001",
-    "name": "方案名称",
-    "painPoint": "痛点总结",
-    "description": "方案描述100-150字",
-    "features": ["功能1", "功能2", "功能3"],
+    "name": "[Solution name in user's language]",
+    "painPoint": "[Pain point summary in user's language]",
+    "description": "[Solution description 100-150 chars in user's language]",
+    "features": ["[Feature 1]", "[Feature 2]", "[Feature 3]"],
     "development": {
       "price": "[USE ROUND: 30000/35000/40000/45000/50000/55000/60000/65000/70000/75000/80000/85000/90000/95000/100000]",
       "currency": "HKD",
-      "duration": "[CALCULATE: 简单2-3周, 中等1-1.5个月, 复杂1.5-2个月]",
-      "techStack": ["根据需求选择技术栈"],
+      "duration": "[Duration in user's language, e.g. 2-3 weeks / 2-3周]",
+      "techStack": ["React/Vue", "Node.js", "PostgreSQL/MySQL"],
       "resources": [
-        {"type": "算力服务", "name": "具体服务名", "specs": "配置", "link": "/platform/services/cloud"},
-        {"type": "芋泥大模型折扣服务", "name": "AI服务名", "link": "/platform/services/ai"}
+        {"type": "Cloud Service", "name": "[Service name]", "specs": "[Config]", "link": "/platform/services/cloud"},
+        {"type": "Yuni AI Service", "name": "[AI service name]", "link": "/platform/services/ai"}
       ],
       "humanResources": [
-        {"role": "全栈工程师", "count": 1, "duration": "与开发周期一致", "link": "/platform/talents/fullstack"}
+        {"role": "[Full-stack Developer in user's language]", "count": 1, "duration": "[Same as dev duration]", "link": "/platform/talents/fullstack"}
       ]
     },
     "maintenance": {
       "monthlyPrice": "[USE: 3000/3500/4000/4500/5000/5500/6000]",
       "currency": "HKD",
       "resources": [
-        {"type": "算力服务器", "name": "服务器名", "monthlyCost": "[USE: 500/800/1000/1200/1500]", "link": "/platform/services/cloud"},
-        {"type": "数据库", "name": "数据库名", "monthlyCost": "[USE: 300/500/800]", "link": "/platform/services/database"},
-        {"type": "芋泥大模型折扣服务费用", "monthlyCost": "[USE: 500/800/1000/1500/2000]", "link": "/platform/services/ai"},
-        {"type": "技术支持", "monthlyCost": "[USE: 500/800/1000]", "link": "/platform/services/support"}
+        {"type": "[Cloud Server]", "name": "[Server name]", "monthlyCost": "[USE: 500/800/1000/1200/1500]", "link": "/platform/services/cloud"},
+        {"type": "[Database]", "name": "[DB name]", "monthlyCost": "[USE: 300/500/800]", "link": "/platform/services/database"},
+        {"type": "[Yuni AI Service Fee]", "monthlyCost": "[USE: 500/800/1000/1500/2000]", "link": "/platform/services/ai"},
+        {"type": "[Tech Support]", "monthlyCost": "[USE: 500/800/1000]", "link": "/platform/services/support"}
       ]
     }
   },
-  "reasoning": "选择理由50-80字"
+  "reasoning": "[Why this solution fits - 50-80 chars in user's language]"
 }
 
 RULES:
-1. Understand user input in ANY language (English, Chinese, Japanese, etc.)
-2. ALL output text fields must be in Chinese (中文)
-3. IMPORTANT - Price based on complexity (use ROUND numbers ending in 000 or 500):
+1. CRITICAL: Reply ALL text fields in ${targetLang} - this is mandatory
+2. Price based on complexity (use ROUND numbers ending in 000 or 500):
    - Simple (landing page, basic CRUD): 30000/35000/40000/45000/50000 HKD
    - Medium (small app, basic features): 50000/55000/60000/65000/70000 HKD  
    - Complex (full system, AI features): 70000/75000/80000/85000/90000/95000/100000 HKD
-4. Human resources MUST be exactly 1 full-stack developer
-5. If requirement is too complex for 100,000 HKD budget:
+3. Human resources MUST be exactly 1 full-stack developer
+4. If requirement is too complex for 100,000 HKD budget:
    - Set "isSimplified": true
-   - Add "simplificationNote": "原需求较复杂，已简化为MVP版本：[简化说明]"
+   - Add "simplificationNote" in user's language explaining the simplification
    - Reduce features to core MVP (3-4 features max)
-6. Monthly maintenance: Use ROUND numbers only (3000, 3500, 4000, 4500, 5000, 5500, 6000 HKD)
-7. Must include "算力服务" and "芋泥大模型折扣服务"
-8. Return ONLY valid JSON with actual number values (not strings or placeholders)`;
+5. Monthly maintenance: Use ROUND numbers only (3000, 3500, 4000, 4500, 5000, 5500, 6000 HKD)
+6. Return ONLY valid JSON with actual number values (not strings or placeholders)`;
 
     try {
       let responseText;
@@ -269,7 +279,7 @@ RULES:
         const completion = await this.client.chat.completions.create({
           model: this.model,
           messages: [
-            { role: 'system', content: '你是一个专业的IT解决方案架构师，擅长根据业务需求设计软件系统方案。始终返回有效的JSON格式。' },
+            { role: 'system', content: 'You are a professional IT solution architect. Detect the language of user input and always reply in the SAME language. Always return valid JSON format.' },
             { role: 'user', content: prompt }
           ],
           temperature: 0.8,

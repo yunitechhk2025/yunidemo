@@ -16,16 +16,16 @@ class SolutionMatcher {
   }
 
   // 主匹配函数 - AI 自主生成模式
-  async matchSolutions(userInput, model = null) {
+  async matchSolutions(userInput, model = null, lang = 'zh-CN') {
     // 如果指定了模型，切换到该模型
     if (model) {
       this.gemini.setModel(model);
     }
     
     // 尝试使用 AI 自主生成完整解决方案
-    console.log(`🤖 使用 AI 自主生成模式 (模型: ${this.gemini.model})...`);
+    console.log(`🤖 使用 AI 自主生成模式 (模型: ${this.gemini.model}, 语言: ${lang})...`);
     
-    const aiResult = await this.gemini.generateFullSolution(userInput);
+    const aiResult = await this.gemini.generateFullSolution(userInput, lang);
 
     if (aiResult && aiResult.solution) {
       console.log(`✅ AI 生成方案成功: ${aiResult.solution.name}`);
