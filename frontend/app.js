@@ -28,7 +28,12 @@ const i18n = {
     person: '人',
     emptyInput: '请输入您的业务痛点',
     error: '错误：',
-    requestFailed: '请求失败：'
+    requestFailed: '请求失败：',
+    voiceInput: '语音输入',
+    voiceStop: '点击停止录音',
+    voiceNotSupported: '您的浏览器不支持语音输入',
+    micDenied: '麦克风权限被拒绝',
+    noSpeech: '未检测到语音'
   },
   'zh-TW': {
     title: 'AI 解決方案生成器',
@@ -58,7 +63,12 @@ const i18n = {
     person: '人',
     emptyInput: '請輸入您的業務痛點',
     error: '錯誤：',
-    requestFailed: '請求失敗：'
+    requestFailed: '請求失敗：',
+    voiceInput: '語音輸入',
+    voiceStop: '點擊停止錄音',
+    voiceNotSupported: '您的瀏覽器不支持語音輸入',
+    micDenied: '麥克風權限被拒絕',
+    noSpeech: '未檢測到語音'
   },
   'en': {
     title: 'AI Solution Generator',
@@ -88,12 +98,24 @@ const i18n = {
     person: '',
     emptyInput: 'Please enter your business pain point',
     error: 'Error: ',
-    requestFailed: 'Request failed: '
+    requestFailed: 'Request failed: ',
+    voiceInput: 'Voice input',
+    voiceStop: 'Click to stop',
+    voiceNotSupported: 'Voice input not supported',
+    micDenied: 'Microphone access denied',
+    noSpeech: 'No speech detected'
   }
 };
 
 // 当前语言
 let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+// 语言代码映射（用于语音识别）
+const speechLangMap = {
+  'zh-CN': 'zh-CN',
+  'zh-TW': 'zh-TW',
+  'en': 'en-US'
+};
 
 // 获取翻译
 function t(key) {
@@ -188,6 +210,105 @@ document.getElementById('painPointInput').addEventListener('keydown', (e) => {
     document.getElementById('matchBtn').click();
   }
 });
+
+// ===== 语音输入功能 =====
+const voiceBtn = document.getElementById('voiceBtn');
+let recognition = null;
+let isRecording = false;
+
+// 检查浏览器是否支持语音识别
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+  recognition = new SpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  
+  // 语音识别结果处理
+  recognition.onresult = (event) => {
+    const textarea = document.getElementById('painPointInput');
+    let finalTranscript = '';
+    let interimTranscript = '';
+    
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const transcript = event.results[i][0].transcript;
+      if (event.results[i].isFinal) {
+        finalTranscript += transcript;
+      } else {
+        interimTranscript += transcript;
+      }
+    }
+    
+    // 追加最终结果
+    if (finalTranscript) {
+      textarea.value += finalTranscript;
+    }
+  };
+  
+  recognition.onerror = (event) => {
+    console.error('语音识别错误:', event.error);
+    stopRecording();
+    if (event.error === 'not-allowed') {
+      showToast(t('micDenied'));
+    } else if (event.error === 'no-speech') {
+      showToast(t('noSpeech'));
+    }
+  };
+  
+  recognition.onend = () => {
+    if (isRecording) {
+      // 如果还在录音状态但识别结束了，重新启动
+      try {
+        recognition.start();
+      } catch (e) {
+        stopRecording();
+      }
+    }
+  };
+  
+  // 点击语音按钮
+  voiceBtn.addEventListener('click', () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  });
+  
+} else {
+  // 浏览器不支持语音识别
+  voiceBtn.disabled = true;
+  voiceBtn.title = t('voiceNotSupported');
+}
+
+function startRecording() {
+  if (!recognition) return;
+  
+  // 设置识别语言
+  recognition.lang = speechLangMap[currentLang] || 'zh-CN';
+  
+  try {
+    recognition.start();
+    isRecording = true;
+    voiceBtn.classList.add('recording');
+    voiceBtn.title = t('voiceStop');
+  } catch (e) {
+    console.error('启动语音识别失败:', e);
+  }
+}
+
+function stopRecording() {
+  if (!recognition) return;
+  
+  try {
+    recognition.stop();
+  } catch (e) {
+    // 忽略
+  }
+  isRecording = false;
+  voiceBtn.classList.remove('recording');
+  voiceBtn.title = t('voiceInput');
+}
 
 function showLoading(show) {
   document.getElementById('loading').style.display = show ? 'flex' : 'none';
