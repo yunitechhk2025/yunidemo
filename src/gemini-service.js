@@ -213,7 +213,8 @@ IMPORTANT - OUTPUT LANGUAGE:
 - This is mandatory regardless of what language the user writes in
 
 IMPORTANT CONSTRAINTS:
-- Maximum budget: 100,000 HKD (≈12,800 USD)
+- Maximum budget: LESS than 100,000 HKD (max 95,000 HKD)
+- Minimum development duration: 4 weeks (4周起)
 - Team size: ONLY 1 full-stack developer
 - If the requirement is too complex for this budget, simplify the solution to fit within constraints
 
@@ -232,9 +233,9 @@ Generate a JSON response following this structure (DO NOT copy example values, c
     "description": "[Solution description 100-150 chars in user's language]",
     "features": ["[Feature 1]", "[Feature 2]", "[Feature 3]"],
     "development": {
-      "price": "[USE ROUND: 30000/35000/40000/45000/50000/55000/60000/65000/70000/75000/80000/85000/90000/95000/100000]",
+      "price": "[USE ROUND: 30000/35000/40000/45000/50000/55000/60000/65000/70000/75000/80000/85000/90000/95000, MAX 95000]",
       "currency": "HKD",
-      "duration": "[Duration in user's language, e.g. 2-3 weeks / 2-3周]",
+      "duration": "[Duration in user's language, MIN 4 weeks, e.g. 4-6 weeks / 4-6周]",
       "techStack": ["React/Vue", "Node.js", "PostgreSQL/MySQL"],
       "resources": [
         {"type": "Cloud Service", "name": "[Service name]", "specs": "[Config]", "link": "/platform/services/cloud"},
@@ -260,17 +261,18 @@ Generate a JSON response following this structure (DO NOT copy example values, c
 
 RULES:
 1. CRITICAL: Reply ALL text fields in ${targetLang} - this is mandatory
-2. Price based on complexity (use ROUND numbers ending in 000 or 500):
+2. Price MUST be less than 100,000 HKD (max 95,000). Use ROUND numbers:
    - Simple (landing page, basic CRUD): 30000/35000/40000/45000/50000 HKD
    - Medium (small app, basic features): 50000/55000/60000/65000/70000 HKD  
-   - Complex (full system, AI features): 70000/75000/80000/85000/90000/95000/100000 HKD
-3. Human resources MUST be exactly 1 full-stack developer
-4. If requirement is too complex for 100,000 HKD budget:
+   - Complex (full system, AI features): 70000/75000/80000/85000/90000/95000 HKD
+3. Development duration MUST be at least 4 weeks (4周起)
+4. Human resources MUST be exactly 1 full-stack developer
+5. If requirement is too complex for 95,000 HKD budget:
    - Set "isSimplified": true
    - Add "simplificationNote" in user's language explaining the simplification
    - Reduce features to core MVP (3-4 features max)
-5. Monthly maintenance: Use ROUND numbers only (3000, 3500, 4000, 4500, 5000, 5500, 6000 HKD)
-6. Return ONLY valid JSON with actual number values (not strings or placeholders)`;
+6. Monthly maintenance: Use ROUND numbers only (3000, 3500, 4000, 4500, 5000, 5500, 6000 HKD)
+7. Return ONLY valid JSON with actual number values (not strings or placeholders)`;
 
     try {
       let responseText;
