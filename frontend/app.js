@@ -26,7 +26,11 @@ const i18n = {
     person: '人',
     emptyInput: '请输入您的业务痛点',
     error: '错误：',
-    requestFailed: '请求失败：'
+    requestFailed: '请求失败：',
+    contactTitle: '联系我们获取方案',
+    contactDesc: '扫描下方任意二维码添加好友，即可免费获取完整解决方案',
+    contactBtn: '我已添加，查看方案',
+    contactSkip: '稍后再说'
   },
   'zh-TW': {
     title: 'AI 解決方案生成器',
@@ -54,7 +58,11 @@ const i18n = {
     person: '人',
     emptyInput: '請輸入您的業務痛點',
     error: '錯誤：',
-    requestFailed: '請求失敗：'
+    requestFailed: '請求失敗：',
+    contactTitle: '聯繫我們獲取方案',
+    contactDesc: '掃描下方任意二維碼添加好友，即可免費獲取完整解決方案',
+    contactBtn: '我已添加，查看方案',
+    contactSkip: '稍後再說'
   },
   'en': {
     title: 'AI Solution Generator',
@@ -82,7 +90,11 @@ const i18n = {
     person: '',
     emptyInput: 'Please enter your business pain point',
     error: 'Error: ',
-    requestFailed: 'Request failed: '
+    requestFailed: 'Request failed: ',
+    contactTitle: 'Contact Us to View Solution',
+    contactDesc: 'Scan either QR code below to add us and unlock your free solution',
+    contactBtn: 'I\'ve Added, Show Solution',
+    contactSkip: 'Maybe Later'
   }
 };
 
@@ -129,6 +141,39 @@ const API_BASE = window.location.hostname === 'localhost' || window.location.hos
   ? 'http://localhost:3000/api'
   : '/api';
 
+let pendingResultData = null;
+
+function showContactModal() {
+  const modal = document.getElementById('contactModal');
+  document.getElementById('contactModalTitle').textContent = t('contactTitle');
+  document.getElementById('contactModalDesc').textContent = t('contactDesc');
+  document.getElementById('contactConfirmBtn').textContent = t('contactBtn');
+  document.getElementById('contactSkipBtn').textContent = t('contactSkip');
+  modal.style.display = 'flex';
+}
+
+function hideContactModal() {
+  document.getElementById('contactModal').style.display = 'none';
+}
+
+document.getElementById('contactConfirmBtn').addEventListener('click', () => {
+  hideContactModal();
+  if (pendingResultData) {
+    displayResults(pendingResultData);
+    pendingResultData = null;
+  }
+});
+
+document.getElementById('contactSkipBtn').addEventListener('click', () => {
+  hideContactModal();
+  pendingResultData = null;
+});
+
+document.getElementById('contactCloseBtn').addEventListener('click', () => {
+  hideContactModal();
+  pendingResultData = null;
+});
+
 document.getElementById('matchBtn').addEventListener('click', async () => {
   const painPoint = document.getElementById('painPointInput').value.trim();
 
@@ -149,14 +194,16 @@ document.getElementById('matchBtn').addEventListener('click', async () => {
     const result = await response.json();
 
     if (result.success) {
-      displayResults(result.data);
+      pendingResultData = result.data;
+      showLoading(false);
+      showContactModal();
     } else {
+      showLoading(false);
       alert(t('error') + result.error);
     }
   } catch (error) {
-    alert(t('requestFailed') + error.message);
-  } finally {
     showLoading(false);
+    alert(t('requestFailed') + error.message);
   }
 });
 

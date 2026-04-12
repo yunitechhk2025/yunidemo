@@ -712,3 +712,153 @@ footer {
   font-weight: 500;
   color: var(--text-muted);
 }
+
+/* ===== Contact Modal ===== */
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+}
+.contact-modal-content {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 520px;
+  width: 92%;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  animation: contactModalIn 0.35s ease-out;
+}
+@keyframes contactModalIn {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.contact-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--bg-secondary);
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+.contact-close-btn:hover {
+  background: var(--glass-border);
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+.contact-modal-content h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.contact-modal-content p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.contact-qr-grid {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.contact-qr-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.contact-qr-wrapper {
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+.contact-qr-img {
+  width: 150px;
+  height: 150px;
+  display: block;
+  border-radius: 8px;
+}
+.contact-qr-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+.wechat-label {
+  color: #07c160;
+  background: rgba(7, 193, 96, 0.1);
+}
+.whatsapp-label {
+  color: #25d366;
+  background: rgba(37, 211, 102, 0.1);
+}
+.contact-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contact-confirm-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), #5b3d99);
+  color: #fff;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.contact-confirm-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+.contact-skip-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px;
+}
+.contact-skip-btn:hover {
+  color: var(--text-primary);
+}
+@media (max-width: 480px) {
+  .contact-qr-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .contact-modal-content {
+    padding: 28px 20px;
+  }
+}
