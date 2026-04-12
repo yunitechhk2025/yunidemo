@@ -291,15 +291,6 @@ function displayResults(data) {
             ${dev.techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
           </div>
 
-          <div class="resources">
-            <strong>${t('resources')}</strong>
-            <ul>
-              ${dev.resources.map(r => `
-                <li><span><span class="resource-type">${r.type}</span>${r.name || r.specs || ''}</span></li>
-              `).join('')}
-            </ul>
-          </div>
-
           <div class="human-resources">
             <strong>${t('humanResources')}</strong>
             <ul>
@@ -308,6 +299,15 @@ function displayResults(data) {
                   <span>${hr.role}</span>
                   <span style="color: var(--text-muted);">${hr.count}${t('person')} · ${hr.duration}</span>
                 </li>
+              `).join('')}
+            </ul>
+          </div>
+
+          <div class="resources">
+            <strong>${t('resources')}</strong>
+            <ul>
+              ${dev.resources.map(r => `
+                <li><span><span class="resource-type">${r.type}</span>${r.name || r.specs || ''}</span></li>
               `).join('')}
             </ul>
           </div>
@@ -327,6 +327,20 @@ function displayResults(data) {
               <span class="value">${maint.duration || '-'}</span>
             </div>
           </div>
+
+          ${maint.humanResources && maint.humanResources.length ? `
+          <div class="human-resources">
+            <strong>${t('humanResources')}</strong>
+            <ul>
+              ${maint.humanResources.map(hr => `
+                <li>
+                  <span>${hr.role}</span>
+                  <span style="color: var(--text-muted);">${hr.count}${t('person')} · ${hr.duration}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+          ` : ''}
 
           <div class="resources">
             <strong>${t('resources')}</strong>

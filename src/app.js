@@ -61,6 +61,11 @@ function normalizeGeneratedSolution(raw, painPoint) {
         monthlyPrice: Number(maint.monthlyPrice || raw?.maintenancePrice || 0),
         duration: maint.duration || raw?.maintenanceDuration || '',
         currency: maint.currency || 'HKD',
+        humanResources: toArray(maint.humanResources).map((hr) => ({
+          role: hr.role || '运维工程师',
+          count: Number(hr.count || 1),
+          duration: hr.duration || maint.duration || ''
+        })),
         resources: toArray(maint.resources)
       }
     },
@@ -76,21 +81,28 @@ async function generateSolution(client, painPoint, lang, model) {
   };
   const targetLang = langMap[lang] || '简体中文';
 
-  const prompt = `Based on the user's business pain point, generate a software solution as a JSON object.
+  const prompt = `根据用户的业务痛点，生成一个软件解决方案 JSON 对象。
 
-User's pain point: ${painPoint}
-Output language: ${targetLang}
-ALL text fields (industry, solution name, painPoint, description, features, role names, resource names, reasoning, etc.) MUST be written in ${targetLang}.
+用户痛点: ${painPoint}
+
+语言规则（最高优先级）:
+- 自动检测用户痛点的语言
+- 所有文本字段必须使用与用户输入相同的语言
+- 如果用户用简体中文输入，所有字段用简体中文
+- 如果用户用繁體中文输入，所有字段用繁體中文
+- 如果用户用 English 输入，所有字段用 English
+- 如果用户用粤语/广东话输入，所有字段用繁體中文
+- role、type、name、specs、duration 等每一个文本字段都必须遵守此规则，不能混用语言
 
 Constraints:
 1. development.price must be ≤ 100000 (HKD)
 2. maintenance.monthlyPrice must be ≤ 5000 (HKD)
+3. humanResources must have EXACTLY 1 person (one full-stack developer who handles everything)
+4. maintenance must be handled by 1 person only
 
-Required fields:
-- painPoint (summary of user's pain point)
-- solution.name and description
-- development.duration, development.humanResources (roles and count)
-- maintenance.duration, maintenance.resources
+Resource detail rules:
+- development.resources: list 3-5 specific items with concrete specs (e.g. "AWS EC2 t3.medium", "PostgreSQL 16 on RDS", "Cloudflare CDN Free Plan", "GitHub Actions CI/CD"). Include server, database, storage, CDN, CI/CD, third-party APIs as applicable.
+- maintenance.resources: list 2-4 specific items (e.g. "AWS CloudWatch monitoring", "Daily automated backup", "SSL certificate auto-renewal"). Be concrete, not generic.
 
 Return ONLY valid JSON, no other text. Use this structure:
 {
@@ -105,14 +117,15 @@ Return ONLY valid JSON, no other text. Use this structure:
       "currency": "HKD",
       "duration": "",
       "techStack": ["", "", ""],
-      "resources": [{"type": "", "name": ""}],
-      "humanResources": [{"role": "", "count": 1, "duration": ""}]
+      "resources": [{"type": "", "name": "", "specs": ""}],
+      "humanResources": [{"role": "Full-Stack Developer", "count": 1, "duration": ""}]
     },
     "maintenance": {
       "monthlyPrice": 0,
       "currency": "HKD",
       "duration": "",
-      "resources": [{"type": "", "name": ""}]
+      "humanResources": [{"role": "DevOps Engineer", "count": 1, "duration": ""}],
+      "resources": [{"type": "", "name": "", "specs": ""}]
     }
   },
   "reasoning": ""
@@ -121,7 +134,7 @@ Return ONLY valid JSON, no other text. Use this structure:
   const completion = await client.chat.completions.create({
     model: model || process.env.OPENAI_MODEL || 'gpt-4o-mini',
     messages: [
-      { role: 'system', content: 'You are a professional solution architect. Output valid JSON only. All text fields must be in the language specified by the user prompt.' },
+      { role: 'system', content: '你是专业的IT解决方案架构师。只输出合法 JSON，不要输出其他内容。最关键的规则：检测用户输入的语言，所有文本字段（包括 role、type、name、specs、duration、industry、features 等）都必须使用与用户输入完全相同的语言，绝对不能混用语言。' },
       { role: 'user', content: prompt }
     ],
     temperature: 0.7,
